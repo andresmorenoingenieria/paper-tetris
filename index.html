@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Paper Tetris — recortes de papel</title>
+  <meta name="description" content="Un Tetris distinto, con fichas de papel recortado estilo Paper Mario. Sin scroll, listo para jugar en cualquier pantalla.">
+  <meta property="og:title" content="Paper Tetris">
+  <meta property="og:description" content="Recorta fichas, apila líneas y llénalas antes de que el papel se llene.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf7e7'/%3E%3Cg stroke='%2333323f' stroke-width='4' stroke-linejoin='round'%3E%3Crect x='10' y='22' width='44' height='22' rx='5' fill='%23ffd43b'/%3E%3Ccircle cx='32' cy='33' r='10' fill='%2379c8f2'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <span class="spark spark--a" aria-hidden="true"></span>
+  <span class="spark spark--b" aria-hidden="true"></span>
+
+  <div class="page">
+    <header class="top">
+      <h1 class="title" id="title" aria-label="Paper Tetris">
+        <span style="--r:-3deg">P</span><span style="--r:2deg">A</span><span style="--r:-1deg">P</span><span style="--r:3deg">E</span><span style="--r:-2deg">R</span>
+        <span class="title-tile"></span>
+        <span style="--r:-2deg">T</span><span style="--r:2deg">E</span><span style="--r:-3deg">T</span><span style="--r:1deg">R</span><span style="--r:-2deg">I</span><span style="--r:3deg">S</span>
+      </h1>
+      <div class="top-btns">
+        <button class="btn btn--small" id="btnPause" hidden>Pausa</button>
+        <button class="btn btn--small" id="btnRestart" hidden>Reiniciar</button>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <section class="frame" id="boardFrame">
+        <span class="bolt bolt--tl" aria-hidden="true"></span>
+        <span class="bolt bolt--tr" aria-hidden="true"></span>
+        <span class="bolt bolt--bl" aria-hidden="true"></span>
+        <span class="bolt bolt--br" aria-hidden="true"></span>
+        <div class="board" id="board" role="grid" aria-label="Tablero de Tetris"></div>
+        <div class="bill" id="bill" hidden></div>
+      </section>
+
+      <aside class="hud">
+        <div class="panel panel--score">
+          <span class="tag">Puntaje</span>
+          <span class="big" id="score">0</span>
+        </div>
+        <div class="rows">
+          <div class="panel panel--mini"><span class="tag">Nivel</span><span class="num" id="level">1</span></div>
+          <div class="panel panel--mini"><span class="tag">L&#237;neas</span><span class="num" id="lines">0</span></div>
+          <div class="panel panel--mini panel--record"><span class="tag">R&#233;cord</span><span class="num" id="record">0</span></div>
+        </div>
+        <div class="panel panel--queue"><span class="tag">En espera</span><div class="holdbox" id="hold"></div></div>
+        <div class="panel panel--queue">
+          <span class="tag">Siguiente</span>
+          <div class="nextwrap" id="nextwrap">
+            <div class="mini" id="next0"></div>
+            <div class="mini" id="next1"></div>
+            <div class="mini" id="next2"></div>
+          </div>
+        </div>
+        <p class="hint">&#8592; &#8594; mover &middot; &#8593; rotar &middot; &#8595; bajar &middot; ESPACIO soltar &middot; C cambiar &middot; P pausa</p>
+      </aside>
+    </main>
+
+    <footer class="touch" id="touch" hidden>
+      <button class="tbtn" data-act="hold" aria-label="Cambiar pieza">Cambio</button>
+      <button class="tbtn" data-act="left" aria-label="Mover izquierda">&#9664;</button>
+      <button class="tbtn" data-act="rotate" aria-label="Rotar">&#10227;</button>
+      <button class="tbtn" data-act="right" aria-label="Mover derecha">&#9654;</button>
+      <button class="tbtn" data-act="soft" aria-label="Bajar">&#9660;</button>
+      <button class="tbtn tbtn--drop" data-act="hard" aria-label="Soltar pieza">Suelta</button>
+    </footer>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="card">
+      <div class="card-flag" aria-hidden="true"></div>
+      <h2 class="card-title" id="cardTitle">Paper Tetris</h2>
+      <p class="card-text" id="cardText">Recorta fichas, apila l&#237;neas y ll&#233;nalas antes de que el papel se llene.</p>
+      <button class="btn btn--big" id="btnStart">Empezar</button>
+      <p class="card-hint" id="cardHint"></p>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
