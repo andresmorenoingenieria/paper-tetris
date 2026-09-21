@@ -89,6 +89,25 @@ test('pausa/reanuda y game over no rompen el loop', async (t) => {
   assert.equal(typeof s.score, 'number');
 });
 
+test('modo noche por defecto y toggle de tema', async (t) => {
+  const window = boot(t);
+  const game = window.__tetris;
+
+  assert.equal(game.theme(), 'night', 'el modo noche debe ser el tema por defecto');
+  const label = window.document.getElementById('btnTheme').textContent;
+  assert.equal(label, 'Noche', 'el botón muestra el tema vigente');
+
+  game.setTheme('day');
+  assert.equal(game.theme(), 'day');
+
+  game.setTheme('night');
+  assert.equal(game.theme(), 'night');
+
+  game.start();
+  game.update(16);
+  assert.ok(game.state().score >= 0, 'el juego sigue funcionando tras cambiar de tema');
+});
+
 test('detecta líneas completas: retira, suma puntos y sube nivel', async (t) => {
   const window = boot(t);
   const game = window.__tetris;

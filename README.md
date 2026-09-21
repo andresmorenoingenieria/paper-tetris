@@ -1,8 +1,8 @@
 # Paper Tetris
 
-Un Tetris sencillo con fichas de papel recortado, estilo **Paper Mario**: marcos de batalla con tornillos, stickers brillantes con borde grueso, paneles tipo ticket, fondo de cuaderno.
+Un Tetris sencillo con fichas de papel recortado, estilo **Paper Mario**: marcos de batalla con tornillos, stickers brillantes con borde grueso, paneles tipo ticket y fondo de cuaderno. Todo sin scroll, cabe en la pantalla. Incluye **modo noche por defecto** con botón para cambiar a día (la preferencia se recuerda).
 
-Hecho para que **simplemente funcione**: sitio 100 % estático (HTML + CSS + JavaScript vanilla, cero build, cero servidor). 
+Hecho para que **simplemente funcione**: sitio 100 % estático (HTML + CSS + JavaScript vanilla, cero build, cero servidor).
 
 ## Cómo jugar
 
@@ -22,7 +22,7 @@ En móvil/táctil aparecen botones en la parte inferior (mantén pulsado `◀` `
 
 ```
 index.html   — marcado completo (tablero, HUD, paneles, overlay)
-style.css    — diseño Paper Mario + responsive sin scroll
+style.css    — diseño Paper Mario + modo noche + responsive sin scroll
 game.js      — motor de Tetris + render + controles (vanilla JS)
 tests/       — smoke tests con happy-dom (node --test)
 ```
@@ -34,7 +34,7 @@ npm install
 npm test
 ```
 
-Smoke tests (con `happy-dom`, sin navegador): bootea la página real, arranca una partida, mueve/rota/suelta/cambia piezas durante miles de frames sin errores, detecta líneas completas (retira filas, suma puntos, sube nivel) y aguanta hasta game over.
+Smoke tests (con `happy-dom`, sin navegador): bootea la página real, arranca una partida, mueve/rota/suelta/cambia piezas durante miles de frames sin errores, detecta líneas completas (retira filas, suma puntos, sube nivel), verifica el modo noche y aguanta hasta game over.
 
 ## Ejecutar localmente
 

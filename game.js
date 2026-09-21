@@ -364,6 +364,16 @@
     }
   }
 
+  function applyTheme(t, saveToStorage) {
+    var theme = t === 'night' ? 'night' : 'day';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (saveToStorage !== false) {
+      try { localStorage.setItem('paper-tetris-theme', theme); } catch (e) {}
+    }
+    var b = document.getElementById('btnTheme');
+    if (b) b.textContent = theme === 'night' ? 'Noche' : 'Día';
+  }
+
   function showBill(text) {
     var b = els.bill;
     b.textContent = text;
@@ -575,6 +585,15 @@
 
     try { record = Number(localStorage.getItem('paper-tetris-record')) || 0; } catch (e) {}
 
+    var theme = 'night';
+    try { theme = localStorage.getItem('paper-tetris-theme') || 'night'; } catch (e) {}
+    applyTheme(theme, false);
+    var btnTheme = document.getElementById('btnTheme');
+    btnTheme.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme') === 'night' ? 'day' : 'night';
+      applyTheme(cur, true);
+    });
+
     var touch = document.getElementById('touch');
     var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     if (coarse || 'ontouchstart' in window) touch.hidden = false;
@@ -620,6 +639,8 @@
       hardDrop: function () { hardDrop(); },
       hold: function () { hold(); },
       paint: render,
+      setTheme: applyTheme,
+      theme: function () { return document.documentElement.getAttribute('data-theme'); },
       debugGrid: function (rows) {
         S.grid = rows.map(function (r) { return r.slice(); });
         S.pendingRows = [];

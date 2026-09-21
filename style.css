@@ -11,10 +11,33 @@
   --paper-2: #fffaf0;
   --paper-edge: #eadfc4;
   --shadow: #c8b98f;
+  --btn-shade: #33323f;
   --kraft: #b07b3c;
   --accent: #e2604a;
   --blue: #79c8f2;
   --yellow: #ffd43b;
+  --page-bg-a: #fdf6e3;
+  --page-bg-b: #f8eccb;
+  --page-line: rgba(51, 50, 63, 0.028);
+  --board-bg: #f4ead0;
+  --board-line: rgba(176, 123, 60, 0.06);
+}
+
+html[data-theme="night"] {
+  --ink: #f2e7cf;
+  --ink-soft: rgba(242, 231, 207, 0.4);
+  --paper: #262019;
+  --paper-2: #2f2820;
+  --paper-edge: #423729;
+  --shadow: rgba(0, 0, 0, 0.45);
+  --btn-shade: rgba(0, 0, 0, 0.55);
+  --kraft: #e0a35c;
+  --accent: #ff8060;
+  --page-bg-a: #262019;
+  --page-bg-b: #191510;
+  --page-line: rgba(242, 231, 207, 0.05);
+  --board-bg: #201a14;
+  --board-line: rgba(224, 163, 92, 0.08);
 }
 
 html, body { height: 100%; }
@@ -24,12 +47,17 @@ body {
   color: var(--ink);
   background:
     radial-gradient(rgba(176, 123, 60, 0.05) 1px, transparent 1.5px),
-    repeating-linear-gradient(0deg, rgba(51, 50, 63, 0.028) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(90deg, rgba(51, 50, 63, 0.028) 0 1px, transparent 1px 5px),
-    linear-gradient(180deg, #fdf6e3 0%, #f8eccb 100%);
+    repeating-linear-gradient(0deg, var(--page-line) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, var(--page-line) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, var(--page-bg-a) 0%, var(--page-bg-b) 100%);
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.panel, .frame, .btn, .tbtn, .card, .bill {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .page {
@@ -89,16 +117,16 @@ body {
   background: var(--paper-2);
   border: 2.5px solid var(--ink);
   border-radius: 14px 16px 12px 18px / 16px 14px 18px 12px;
-  box-shadow: 3px 4px 0 var(--ink);
+  box-shadow: 3px 4px 0 var(--btn-shade);
   padding: 6px 14px;
   cursor: pointer;
   transform: rotate(-1deg);
   transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
-.btn:hover { transform: rotate(-1deg) translateY(-2px); box-shadow: 3px 6px 0 var(--ink); }
-.btn:active { transform: translateY(2px); box-shadow: 1px 2px 0 var(--ink); }
+.btn:hover { transform: rotate(-1deg) translateY(-2px); box-shadow: 3px 6px 0 var(--btn-shade); }
+.btn:active { transform: translateY(2px); box-shadow: 1px 2px 0 var(--btn-shade); }
 .btn:focus-visible { outline: 3px dashed var(--accent); outline-offset: 2px; }
-.btn--small { padding: 4px 12px; font-size: 0.85em; border-radius: 10px; box-shadow: 2px 3px 0 var(--ink); }
+.btn--small { padding: 4px 12px; font-size: 0.85em; border-radius: 10px; box-shadow: 2px 3px 0 var(--btn-shade); }
 .btn--big { font-size: 1.35em; padding: 10px 26px; background: var(--yellow); text-transform: uppercase; letter-spacing: 1px; }
 
 /* ---------- escenario ---------- */
@@ -154,11 +182,12 @@ body {
   grid-template-columns: repeat(10, var(--cell));
   grid-template-rows: repeat(20, var(--cell));
   background:
-    linear-gradient(rgba(176, 123, 60, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(176, 123, 60, 0.06) 1px, transparent 1px),
-    #f4ead0;
+    linear-gradient(var(--board-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--board-line) 1px, transparent 1px),
+    var(--board-bg);
   background-size: var(--cell) var(--cell), var(--cell) var(--cell), 100% 100%;
   image-rendering: pixelated;
+  transition: background 0.3s ease;
 }
 
 .cell {
@@ -224,7 +253,7 @@ body {
   background: var(--paper-2);
   border: 3px solid var(--ink);
   border-radius: 12px 14px 10px 16px / 14px 12px 16px 10px;
-  box-shadow: 4px 5px 0 var(--ink);
+  box-shadow: 4px 5px 0 var(--btn-shade);
   padding: 8px 16px;
   font-weight: 700;
   text-transform: uppercase;
@@ -333,7 +362,7 @@ body {
   background: var(--paper-2);
   border: 2.5px solid var(--ink);
   border-radius: 12px 14px 10px 15px / 14px 12px 15px 10px;
-  box-shadow: 2px 3px 0 var(--ink);
+  box-shadow: 2px 3px 0 var(--btn-shade);
   width: clamp(52px, 15vw, 64px);
   height: clamp(46px, 11vh, 56px);
   font-size: 1.25em;
@@ -342,7 +371,7 @@ body {
   user-select: none;
   touch-action: manipulation;
 }
-.tbtn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.tbtn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shade); }
 .tbtn--drop { background: var(--accent); color: var(--paper-2); font-size: 0.8em; letter-spacing: 1px; }
 
 /* ---------- overlay ---------- */
